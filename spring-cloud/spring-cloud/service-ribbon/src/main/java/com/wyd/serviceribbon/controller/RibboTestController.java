@@ -20,6 +20,7 @@ public class RibboTestController {
     private RibboService service;
     @RequestMapping("/test1")
     public Object test1(){
+        System.out.println("ribbon");
         return service.eurekaClientTest1();
     }
 

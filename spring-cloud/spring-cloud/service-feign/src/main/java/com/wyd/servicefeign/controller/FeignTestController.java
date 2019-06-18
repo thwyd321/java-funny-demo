@@ -18,6 +18,7 @@ public class FeignTestController {
     private FeignService eurekaClientService;
     @RequestMapping("/test2")
     public Object test2(){
+        System.out.println("feign");
         String s = eurekaClientService.eurekaClientTest();
         return s;
     }
