@@ -6,7 +6,6 @@
         <groupId>com.wyd</groupId>
         <artifactId>spring-cloud</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wyd</groupId>
     <artifactId>config-server</artifactId>
