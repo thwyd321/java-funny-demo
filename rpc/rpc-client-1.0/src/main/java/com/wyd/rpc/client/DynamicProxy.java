@@ -25,6 +25,14 @@ public class DynamicProxy {
         this.version = version;
     }
 
+    /**
+     * 使用jdk动态代理，服务端的api改变不用改代码
+     * @param interfaceClass
+     * @param host
+     * @param port
+     * @param <T>
+     * @return
+     */
     public <T> T clientDynamicProxy(final Class interfaceClass, String host, int port){
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass}, new InvocationHandler() {
 
@@ -38,6 +46,12 @@ public class DynamicProxy {
             }
         });
     }
+
+    /**
+     * 客户端与服务端建立Socket通信
+     * @param rpcRequest
+     * @return
+     */
     public Object send(RpcRequest rpcRequest) {
         ObjectOutputStream objectOutputStream = null;
         ObjectInputStream objectInputStream = null;
