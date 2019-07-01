@@ -20,7 +20,7 @@ import java.net.UnknownHostException;
 public class Client {
 
     public static void main(String[] args) {
-        IHelloService helloService = HelloServiceProxy.getInstance("1.0");
+        IHelloService helloService = HelloServiceProxy.getInstance("2.0");
         /*String result = helloService.hello("asdfasdfasddf");
         System.out.println(result)*/;
         User user = new User();
