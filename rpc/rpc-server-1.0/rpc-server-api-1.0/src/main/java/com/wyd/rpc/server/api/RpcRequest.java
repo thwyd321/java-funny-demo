@@ -11,6 +11,16 @@ public class RpcRequest implements Serializable {
 
     private String version;
 
+    public RpcRequest(String className, String methodName, Object[] parameters, String version) {
+        this.className = className;
+        this.methodName = methodName;
+        this.parameters = parameters;
+        this.version = version;
+    }
+
+    public RpcRequest() {
+    }
+
     public String getVersion() {
         return version;
     }
