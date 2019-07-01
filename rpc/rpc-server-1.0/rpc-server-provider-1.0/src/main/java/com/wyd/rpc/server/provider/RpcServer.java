@@ -45,15 +45,15 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         //1.获取被注解标记的类
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(RpcService.class);
         if (!serviceBeanMap.isEmpty()) {
-            for(Object servcieBean:serviceBeanMap.values()){
+            for (Object servcieBean : serviceBeanMap.values()) {
                 //拿到注解
-                RpcService rpcService=servcieBean.getClass().getAnnotation((RpcService.class));
-                String serviceName=rpcService.value().getName();//拿到接口类定义,com.wyd.rpc.server.api.IHelloService
-                String version=rpcService.version(); //拿到版本号
-                if(!StringUtils.isEmpty(version)){
-                    serviceName+="-"+version;
+                RpcService rpcService = servcieBean.getClass().getAnnotation((RpcService.class));
+                String serviceName = rpcService.value().getName();//拿到接口类定义,com.wyd.rpc.server.api.IHelloService
+                String version = rpcService.version(); //拿到版本号
+                if (!StringUtils.isEmpty(version)) {
+                    serviceName += "-" + version;
                 }
-                rpcMap.put(serviceName,servcieBean);
+                rpcMap.put(serviceName, servcieBean);
             }
         }
     }
@@ -61,14 +61,17 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
     /**
      * spring初始化时  setApplicationContext方法执行后会执行此方法
      * 通过accept方法阻塞等待客户端连接，获取到连接后启线程处理
+     *
      * @throws IOException
      */
     public void afterPropertiesSet() throws IOException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(port);
-            Socket socket = serverSocket.accept();
-            executorService.execute(new RequestHandler(socket,rpcMap));
+            while (true) {
+                Socket socket = serverSocket.accept();
+                executorService.execute(new RequestHandler(socket, rpcMap));
+            }
         } catch (Exception e) {
 
         } finally {
