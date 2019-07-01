@@ -5,7 +5,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -42,21 +44,21 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         //1.获取被注解标记的类
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(RpcService.class);
-        if (serviceBeanMap.isEmpty()) {
-            serviceBeanMap.forEach((serviceName, serviceBean) -> {
-                //遍历serviceBeanMap，获取到每一个注解
-                RpcService rpcServiceAnnotation = serviceBean.getClass().getAnnotation(RpcService.class);
-                //获取到注解标记的类的接口名
-                String name = rpcServiceAnnotation.value().getName();
-                //获取到注解标记的类的版本号
-                String version = rpcServiceAnnotation.version();
-                //接口名+_+version 为key，value为实现类的实例
-                rpcMap.put(name + "_" + Optional.ofNullable(version).orElse(""), serviceBean);
-            });
+        if (!serviceBeanMap.isEmpty()) {
+            for(Object servcieBean:serviceBeanMap.values()){
+                //拿到注解
+                RpcService rpcService=servcieBean.getClass().getAnnotation((RpcService.class));
+                String serviceName=rpcService.value().getName();//拿到接口类定义,com.wyd.rpc.server.api.IHelloService
+                String version=rpcService.version(); //拿到版本号
+                if(!StringUtils.isEmpty(version)){
+                    serviceName+="-"+version;
+                }
+                rpcMap.put(serviceName,servcieBean);
+            }
         }
     }
 
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() throws IOException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(port);
