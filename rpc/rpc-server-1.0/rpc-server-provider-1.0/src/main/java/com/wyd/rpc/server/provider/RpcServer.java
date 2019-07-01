@@ -58,6 +58,11 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         }
     }
 
+    /**
+     * spring初始化时  setApplicationContext方法执行后会执行此方法
+     * 通过accept方法阻塞等待客户端连接，获取到连接后启线程处理
+     * @throws IOException
+     */
     public void afterPropertiesSet() throws IOException {
         ServerSocket serverSocket = null;
         try {
