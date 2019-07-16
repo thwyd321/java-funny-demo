@@ -1,5 +1,6 @@
 package com.wyd.design.prototype.simple;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @Date : 2019/7/16 11:45
  * @Version :1.0
  */
-public class People implements ProtoType {
+public class People implements ProtoType, Serializable {
 
     private int age;
     private String name;
