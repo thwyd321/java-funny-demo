@@ -15,7 +15,9 @@
 2. design-pattern-prototype(原型模式)
     1. simple 浅克隆
     2. deep 深克隆
-3. design-pattern-proxy(代理模式)
+3. design-pattern-proxyf(代理模式)
+    1. dynamic 动态代理
+    2. statice 静态代理
 4. design-pattern-singleton(单例模式)
     1. hungry 饿汉模式
     2. lazy 懒汉模式
