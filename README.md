@@ -16,7 +16,7 @@
     1. simple 浅克隆
     2. deep 深克隆
 3. design-pattern-proxyf(代理模式)
-    1. dynamic 动态代理
+    1. dynamic 动态代理 模仿动态切换数据源
     2. statice 静态代理
 4. design-pattern-singleton(单例模式)
     1. hungry 饿汉模式
