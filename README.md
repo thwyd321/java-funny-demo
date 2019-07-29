@@ -22,6 +22,8 @@
     1. hungry 饿汉模式
     2. lazy 懒汉模式
     3. register 注册式单例
+5. design-pattern-strategy(策略模式)
+6. design-pattern-delegate(委派模式)
 ## 四.spring-cloud
 1. eureka-server: 注册中心
 2. service-a : 服务提供和消费者A
