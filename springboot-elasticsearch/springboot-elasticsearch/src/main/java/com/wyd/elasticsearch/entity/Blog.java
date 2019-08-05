@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * @ClassName :Blog
@@ -14,13 +15,12 @@ import org.springframework.data.elasticsearch.annotations.Field;
  * @Version :1.0
  */
 @Data
-@Document(indexName = "website",type = "blog")
+@Document(indexName = "website")
 public class Blog {
-    @Id
-    private String id;
 
+    @Id
     private String blogId;
-    @Field
+    @Field(type = FieldType.Text,analyzer = "analysis-ik")
     private String title;
     private String text;
     private String date;
